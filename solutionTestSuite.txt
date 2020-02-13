@@ -1,0 +1,8 @@
+solveTest
+colOptionsTest
+containsTest
+placeOptionsTest
+rowOptionsTest
+sortColsTest
+sortRowsTest
+printTest

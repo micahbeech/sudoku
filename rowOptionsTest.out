@@ -1,0 +1,36 @@
+1 can go in row(s): 0 1 2 3 4 5 6 7 8 
+2 can go in row(s): 0 1 2 3 4 5 6 7 8 
+3 can go in row(s): 0 1 2 3 4 5 6 7 8 
+4 can go in row(s): 0 1 2 3 4 5 6 7 8 
+5 can go in row(s): 0 1 2 3 4 5 6 7 8 
+6 can go in row(s): 0 1 2 3 4 5 6 7 8 
+7 can go in row(s): 0 1 2 3 4 5 6 7 8 
+8 can go in row(s): 0 1 2 3 4 5 6 7 8 
+9 can go in row(s): 0 1 2 3 4 5 6 7 8 
+1 can go in row(s): 
+2 can go in row(s): 
+3 can go in row(s): 
+4 can go in row(s): 
+5 can go in row(s): 
+6 can go in row(s): 
+7 can go in row(s): 
+8 can go in row(s): 
+9 can go in row(s): 
+1 can go in row(s): 0 2 3 5 6 8 
+2 can go in row(s): 0 1 2 3 4 7 8 
+3 can go in row(s): 1 2 5 6 7 8 
+4 can go in row(s): 0 1 2 3 5 6 8 
+5 can go in row(s): 2 3 4 5 6 8 
+6 can go in row(s): 0 4 7 8 
+7 can go in row(s): 1 2 3 4 6 7 
+8 can go in row(s): 0 1 5 7 
+9 can go in row(s): 0 3 4 5 6 
+1 can go in row(s): 0 1 2 6 8 
+2 can go in row(s): 0 2 3 4 5 7 8 
+3 can go in row(s): 0 2 3 5 6 7 
+4 can go in row(s): 0 2 4 5 6 8 
+5 can go in row(s): 2 3 4 5 6 8 
+6 can go in row(s): 0 1 2 3 5 6 7 8 
+7 can go in row(s): 1 2 4 5 6 7 
+8 can go in row(s): 0 3 6 
+9 can go in row(s): 1 2 3 4 6 8 
