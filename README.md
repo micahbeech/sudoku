@@ -1,1 +1,1 @@
-[](https://sudokusolver.net/#)
+[Sudoku Solver](https://sudokusolver.net/#)
