@@ -1,0 +1,1 @@
+[](https://sudokusolver.net/#)
