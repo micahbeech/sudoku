@@ -71,5 +71,6 @@
         "*.tcc": "cpp",
         "memory_resource": "cpp",
         "cinttypes": "cpp"
-    }
+    },
+    "python.pythonPath": "/Library/Frameworks/Python.framework/Versions/3.7/bin/python3"
 }
