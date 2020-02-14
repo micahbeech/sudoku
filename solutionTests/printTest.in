@@ -1,9 +1,9 @@
 solutiontest
 empty
 print
-fill board1.txt
+fill boards/board1.txt
 print
-fill board2.txt
+fill boards/board2.txt
 print
-fill board6.txt
+fill boards/board6.txt
 print
