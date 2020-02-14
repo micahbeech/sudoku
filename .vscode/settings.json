@@ -71,5 +71,6 @@
         "*.tcc": "cpp",
         "memory_resource": "cpp",
         "cinttypes": "cpp"
-    }
+    },
+    "python.pythonPath": "/usr/local/bin/python3"
 }

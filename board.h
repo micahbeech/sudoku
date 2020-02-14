@@ -3,6 +3,8 @@
 
 #include <vector>
 
+#define BOARD_SIZE 9
+
 class Board {
 
     std::vector<std::vector<char>> board;

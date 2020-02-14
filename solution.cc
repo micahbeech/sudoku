@@ -165,7 +165,7 @@ bool Solution::boxContains(Board &board, int row, int col, char c) {
 // returns all the rows that c could be inserted into
 std::vector<int> Solution::rowOptions(Board &board, char c) {
     std::vector<int> rows;
-    for (int i = 0; i < 9; ++i) {
+    for (int i = 0; i < BOARD_SIZE; ++i) {
         if (!rowContains(board, i, c)) rows.push_back(i);
     }
     return rows;
@@ -174,7 +174,7 @@ std::vector<int> Solution::rowOptions(Board &board, char c) {
 // returns all the cols that c could be inserted into
 std::vector<int> Solution::colOptions(Board &board, char c) {
     std::vector<int> cols;
-    for (int i = 0; i < 9; ++i) {
+    for (int i = 0; i < BOARD_SIZE; ++i) {
         if (!colContains(board, i, c)) cols.push_back(i);
     }
     return cols;

@@ -4,44 +4,45 @@
 
 #include "board.h"
 
+class BAD_BOARD_SIZE{};
+
 Board::Board() {
-    size_t boardSize = 9;
     std::vector<char> col{'.','.','.','.','.','.','.','.','.'};
-    std::vector<std::vector<char>> board{boardSize, col};
+    std::vector<std::vector<char>> board{BOARD_SIZE, col};
     this->board = board;
 }
 
 Board::Board(const std::vector<std::vector<char>> &board) : board(board) {
 
     // board must be 9 x 9
-    if (board.size() != 9) throw;
+    if (board.size() != BOARD_SIZE) throw BAD_BOARD_SIZE{};
     for (auto col : board) {
-        if (col.size() != 9) throw;
+        if (col.size() != BOARD_SIZE) throw BAD_BOARD_SIZE{};
     }
 
 }
 
 Board::Board(std::initializer_list<char> init) {
 
-    assert(init.size() == 81);
+    assert(init.size() == BOARD_SIZE * BOARD_SIZE);
 
-    board.reserve(9);
+    board.reserve(BOARD_SIZE);
 
     int i = 0;
     int j = 0;
 
     std::vector<char> col;
-    col.reserve(9);
+    col.reserve(BOARD_SIZE);
     board.push_back(col);
 
     for (auto c : init) {
-        if (j < 9) {
+        if (j < BOARD_SIZE) {
             ++j;
         } else {
             j = 1;
             ++i;
             std::vector<char> col;
-            col.reserve(9);
+            col.reserve(BOARD_SIZE);
             board.push_back(col);
         }
         try {  
@@ -57,14 +58,13 @@ Board::Board(std::initializer_list<char> init) {
 std::vector<std::vector<char>> &Board::getContents() { return board; }
 
 void Board::insert(int row, int col, char c) {
-    assert(row < 9);
-    assert(col < 9);
-    assert(row >= 0);
-    assert(col >= 0);
+    if (!(row < BOARD_SIZE &&
+        col < BOARD_SIZE &&
+        row >= 0 &&
+        col >= 0)) {
+            throw BAD_BOARD_SIZE{};
+    }
     try{
-        // if (board.at(row).at(col) != '.') {
-        //     std::cout << "Replacing existing value in board." << std::endl;
-        // }
         board.at(row).at(col) = c;
     } catch (...) {
         std::cerr << "Tried to insert a character at an invalid board location" << std::endl;

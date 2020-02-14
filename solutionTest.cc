@@ -17,7 +17,7 @@ void SolutionTest::empty() {
 
 void SolutionTest::fill() {
 
-    std::vector<std::vector<char>> table{9, std::vector<char>{}};
+    std::vector<std::vector<char>> table{BOARD_SIZE, std::vector<char>{}};
 
     std::string filename;
     std::cin >> filename;
@@ -32,7 +32,7 @@ void SolutionTest::fill() {
     int col = 0;
 
     while (f >> c) {
-        if (col == 9) {
+        if (col == BOARD_SIZE) {
             col = 0;
             ++row;
         }
