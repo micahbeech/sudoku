@@ -161,7 +161,7 @@ void SolutionTest::boxContains() {
     std::cin >> c;
 
     int row = box;
-    int col = (box % 3) * 3;
+    int col = (box % BOX_WIDTH) * BOX_WIDTH;
     bool result = sol.boxContains(board, row, col, c);
 
     std::cout << c << " is in box " << box << ": ";

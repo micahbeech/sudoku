@@ -11,9 +11,8 @@ void Solution::solveSudoku(Board& board) {
     bool didInsert = true;
     while (didInsert) {
         didInsert = false;
-        for (auto c = characters.begin(); c != characters.end(); ++c) {
-            std::vector<std::pair<int,int>> places = placeOptions(board, *c);
-            if (insert(board, places, *c)) didInsert = true;
+        for (auto c : characters) {
+            if (insert(board, c)) didInsert = true;
         }
     }
 }
@@ -45,8 +44,8 @@ void Solution::sortPlacesBoxes(std::vector<std::pair<int,int>> &places) {
     for (auto i = places.begin(); i != places.end(); ++i) {
         auto smallest = i;
         for (auto j = i + 1; j != places.end(); ++j) {
-            int box1 = (j->first / 3) * 3 + j->second / 3;
-            int box2 = (smallest->first / 3) * 3 + smallest->second / 3;
+            int box1 = (j->first / BOX_WIDTH) * BOX_WIDTH + j->second / BOX_WIDTH;
+            int box2 = (smallest->first / BOX_WIDTH) * BOX_WIDTH + smallest->second / BOX_WIDTH;
             if (box1 < box2) smallest = j;
         }
         if (i != smallest) std::swap(*i, *smallest);
@@ -54,7 +53,8 @@ void Solution::sortPlacesBoxes(std::vector<std::pair<int,int>> &places) {
 }
 
 // inserts any c at any place in places that can be inserted into board
-bool Solution::insert(Board &board, std::vector<std::pair<int,int>> places, char c) {
+bool Solution::insert(Board &board, char c) {
+    std::vector<std::pair<int,int>> places = placeOptions(board, c);
     bool inserted = false;
     sortPlacesRows(places);
     int i = 0;
@@ -89,16 +89,16 @@ bool Solution::insert(Board &board, std::vector<std::pair<int,int>> places, char
             inserted = true;
             continue;
         } 
-        int box1 = (places[i].first / 3) * 3 + places[i].second / 3;
-        int box2 = (places[i+1].first / 3) * 3 + places[i+1].second / 3;
+        int box1 = (places[i].first / BOX_WIDTH) * BOX_WIDTH + places[i].second / BOX_WIDTH;
+        int box2 = (places[i+1].first / BOX_WIDTH) * BOX_WIDTH + places[i+1].second / BOX_WIDTH;
         if (box1 != box2) {
             board.insert(places[i].first, places[i].second, c);
             places = placeOptions(board, c);
             inserted = true;
         } else {
             do { 
-                box1 = (places[i].first / 3) * 3 + places[i].second / 3;
-                box2 = (places[i+1].first / 3) * 3 + places[i+1].second / 3;
+                box1 = (places[i].first / BOX_WIDTH) * BOX_WIDTH + places[i].second / BOX_WIDTH;
+                box2 = (places[i+1].first / BOX_WIDTH) * BOX_WIDTH + places[i+1].second / BOX_WIDTH;
                 ++i; 
             } while (i < places.size() && box1 == box2);
         }
@@ -154,17 +154,17 @@ bool Solution::colContains(Board &board, int col, char c) {
 //      3 | 4 | 5
 //      6 | 7 | 8
 bool Solution::boxContains(Board &board, int row, int col, char c) {
-    if (row < 0 || row > 8) return false;
-    if (col < 0 || col > 8) return false;
+    if (row < 0 || row >= BOARD_SIZE) return false;
+    if (col < 0 || col >= BOARD_SIZE) return false;
     
-    row = (row / 3) * 3;
-    col = (col / 3) * 3;
-    for (int i = row; i < row + 3; ++i) {
-        for (int j = col; j < col + 3; ++j) {
+    row = (row / BOX_WIDTH) * BOX_WIDTH;
+    col = (col / BOX_WIDTH) * BOX_WIDTH;
+    for (int i = row; i < row + BOX_WIDTH; ++i) {
+        for (int j = col; j < col + BOX_WIDTH; ++j) {
             try {
                 if (board.getContents().at(i).at(j) == c) return true;
             } catch (...) {
-                std::cerr << "Error: Failed to access box contents for box " << (row / 3) * 3 + col % 3 << std::endl;
+                std::cerr << "Error: Failed to access box contents for box " << (row / BOX_WIDTH) * BOX_WIDTH + col % BOX_WIDTH << std::endl;
                 return false;
             }
         }

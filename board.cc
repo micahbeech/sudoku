@@ -76,13 +76,13 @@ void Board::insert(int row, int col, char c) {
 std::ostream& operator<< (std::ostream &os, Board &board) {
     int j = 0;
     for (auto row : board.getContents()) {
-        if (j == 0 || j == 3 || j == 6) {
+        if (j == 0 || j == BOX_WIDTH || j == BOX_WIDTH * 2) {
             os << "-------------------------" << std::endl;
         }
         ++j;
         int i = 0;
         for (auto c : row) {
-            if (i == 0 || i == 3 || i == 6) {
+            if (i == 0 || i == BOX_WIDTH || i == BOX_WIDTH * 2) {
                 os << "| ";
             }
             ++i;

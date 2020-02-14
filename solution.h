@@ -16,7 +16,7 @@ class Solution {
     void sortPlacesBoxes(std::vector<std::pair<int,int>> &places);
 
     // inserts any c at any place in places that can be inserted into board
-    bool insert(Board &board, std::vector<std::pair<int,int>> places, char c);
+    bool insert(Board &board, char c);
 
     std::vector<std::pair<int,int>> placeOptions(Board &board, char c);
 
