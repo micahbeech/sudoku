@@ -1,3 +1,4 @@
+solutiontest
 empty
 placeoptions 1
 placeoptions 2
@@ -8,7 +9,7 @@ placeoptions 6
 placeoptions 7
 placeoptions 8
 placeoptions 9
-fill board1.txt
+fill boards/board1.txt
 placeoptions 1
 placeoptions 2
 placeoptions 3
@@ -18,7 +19,7 @@ placeoptions 6
 placeoptions 7
 placeoptions 8
 placeoptions 9
-fill board2.txt
+fill boards/board2.txt
 placeoptions 1
 placeoptions 2
 placeoptions 3
@@ -28,7 +29,7 @@ placeoptions 6
 placeoptions 7
 placeoptions 8
 placeoptions 9
-fill board3.txt
+fill boards/board3.txt
 placeoptions 1
 placeoptions 2
 placeoptions 3

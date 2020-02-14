@@ -1,0 +1,9 @@
+solutiontest
+empty
+print
+fill boards/board1.txt
+print
+fill boards/board2.txt
+print
+fill boards/board6.txt
+print

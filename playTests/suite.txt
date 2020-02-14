@@ -1,0 +1,3 @@
+insert
+solve
+insert1

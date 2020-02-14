@@ -17,7 +17,7 @@ void SolutionTest::empty() {
 
 void SolutionTest::fill() {
 
-    std::vector<std::vector<char>> table{9, std::vector<char>{}};
+    std::vector<std::vector<char>> table{BOARD_SIZE, std::vector<char>{}};
 
     std::string filename;
     std::cin >> filename;
@@ -32,7 +32,7 @@ void SolutionTest::fill() {
     int col = 0;
 
     while (f >> c) {
-        if (col == 9) {
+        if (col == BOARD_SIZE) {
             col = 0;
             ++row;
         }
@@ -161,47 +161,18 @@ void SolutionTest::boxContains() {
     std::cin >> c;
 
     int row = box;
-    int col = (box % 3) * 3;
+    int col = (box % BOX_WIDTH) * BOX_WIDTH;
     bool result = sol.boxContains(board, row, col, c);
 
     std::cout << c << " is in box " << box << ": ";
     std::cout << std::boolalpha << result << std::endl;
 }
 
-void SolutionTest::rowOptions() {
-    char c;
-    std::cin >> c;
-
-    std::vector<int> rows = sol.rowOptions(board, c);
-
-    std::cout << c << " can go in row(s): ";
-    for (auto row : rows) {
-        std::cout << row << " ";
-    }
-    std::cout << std::endl;
-}
-
-void SolutionTest::colOptions() {
-    char c;
-    std::cin >> c;
-
-    std::vector<int> cols = sol.colOptions(board, c);
-
-    std::cout << c << " can go in column(s): ";
-    for (auto col : cols) {
-        std::cout << col << " ";
-    }
-    std::cout << std::endl;
-}
-
 void SolutionTest::placeOptions() {
     char c;
     std::cin >> c;
 
-    std::vector<int> rows = sol.rowOptions(board, c);
-    std::vector<int> cols = sol.colOptions(board, c);
-
-    std::vector<std::pair<int,int>> places = sol.placeOptions(board, rows, cols, c);
+    std::vector<std::pair<int,int>> places = sol.placeOptions(board, c);
 
     std::cout << c << " can go in these places: ";
     for (auto pair : places) {
@@ -248,12 +219,6 @@ void SolutionTest::run() {
 
         } else if (cmd == "boxcontains") {
             boxContains();
-
-        } else if (cmd == "rowoptions") {
-            rowOptions();
-
-        } else if (cmd == "coloptions") {
-            colOptions();
 
         } else if (cmd == "placeoptions") {
             placeOptions();

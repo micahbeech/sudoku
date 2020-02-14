@@ -3,6 +3,9 @@
 
 #include <vector>
 
+#define BOARD_SIZE 9
+#define BOX_WIDTH 3
+
 class Board {
 
     std::vector<std::vector<char>> board;

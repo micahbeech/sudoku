@@ -52,12 +52,6 @@ class SolutionTest {
     //      6 | 7 | 8
     void boxContains();
 
-    // Read in a character and show which rows it can go in
-    void rowOptions();
-
-    // Read in a character and show which columns it can go in
-    void colOptions();
-
     // Read in a character and show which places it can go in on the board
     void placeOptions();
 

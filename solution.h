@@ -16,9 +16,9 @@ class Solution {
     void sortPlacesBoxes(std::vector<std::pair<int,int>> &places);
 
     // inserts any c at any place in places that can be inserted into board
-    bool insert(Board &board, std::vector<std::pair<int,int>> places, char c);
+    bool insert(Board &board, char c);
 
-    std::vector<std::pair<int,int>> placeOptions(Board &board, std::vector<int> &rows, std::vector<int> &cols, char c);
+    std::vector<std::pair<int,int>> placeOptions(Board &board, char c);
 
     // returns true if c is in row
     bool rowContains(Board &board, int row, char c);
@@ -31,12 +31,6 @@ class Solution {
     //      3 | 4 | 5
     //      6 | 7 | 8
     bool boxContains(Board &board, int row, int col, char c);
-
-    // returns all the rows that c could be inserted into
-    std::vector<int> rowOptions(Board &board, char c);
-
-    // returns all the cols that c could be inserted into
-    std::vector<int> colOptions(Board &board, char c);
 
 };
 

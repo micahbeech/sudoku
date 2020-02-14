@@ -1,0 +1,4 @@
+solutiontest
+fill boards/board2.txt
+solve
+print
