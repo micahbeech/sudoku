@@ -8,11 +8,9 @@
 
 void Solution::solveSudoku(Board& board) {
     std::vector<char> characters{'1','2','3','4','5','6','7','8','9'};
-    bool didInsert = true;
-    while (didInsert) {
-        didInsert = false;
-        for (auto c : characters) {
-            if (insert(board, c)) didInsert = true;
+    while (!characters.empty()) {
+        for (auto c = characters.begin(); c != characters.end(); ++c) {
+            if (!insert(board, *c)) characters.erase(c);
         }
     }
 }
@@ -56,51 +54,50 @@ void Solution::sortPlacesBoxes(std::vector<std::pair<int,int>> &places) {
 bool Solution::insert(Board &board, char c) {
     std::vector<std::pair<int,int>> places = placeOptions(board, c);
     bool inserted = false;
-    sortPlacesRows(places);
     int i = 0;
     while (i < places.size()) {
+	sortPlacesRows(places);
         if (i == places.size() - 1 || places[i].first != places[i+1].first) {
             board.insert(places[i].first, places[i].second, c);
+	    inserted = true;
             places = placeOptions(board, c);
-            inserted = true;
         } else {
             int row = places[i].first;
             do { ++i; } while (i < places.size() && places[i].first == row);
         }
     }
-    sortPlacesCols(places);
     i = 0;
     while (i < places.size()) {
+	sortPlacesCols(places);
         if (i == places.size() - 1 || places[i].second != places[i+1].second) {
             board.insert(places[i].first, places[i].second, c);
+	    inserted = true;
             places = placeOptions(board, c);
-            inserted = true;
         } else {
             int col = places[i].second;
             do { ++i; } while (i < places.size() && places[i].second == col);
         }
     }
-    sortPlacesBoxes(places);
     i = 0;
     while (i < places.size()) {
+	sortPlacesBoxes(places);
         if (i == places.size() - 1) {
             board.insert(places[i].first, places[i].second, c);
+	    inserted = true;
             places = placeOptions(board, c);
-            inserted = true;
             continue;
         } 
         int box1 = (places[i].first / BOX_WIDTH) * BOX_WIDTH + places[i].second / BOX_WIDTH;
         int box2 = (places[i+1].first / BOX_WIDTH) * BOX_WIDTH + places[i+1].second / BOX_WIDTH;
         if (box1 != box2) {
             board.insert(places[i].first, places[i].second, c);
+	    inserted = true;
             places = placeOptions(board, c);
-            inserted = true;
         } else {
+	    int box = (places[i].first / BOX_WIDTH) * BOX_WIDTH + places[i].second / BOX_WIDTH;
             do { 
-                box1 = (places[i].first / BOX_WIDTH) * BOX_WIDTH + places[i].second / BOX_WIDTH;
-                box2 = (places[i+1].first / BOX_WIDTH) * BOX_WIDTH + places[i+1].second / BOX_WIDTH;
                 ++i; 
-            } while (i < places.size() && box1 == box2);
+            } while (i < places.size() && box == (places[i].first / BOX_WIDTH) * BOX_WIDTH + places[i].second / BOX_WIDTH);
         }
     }
     return inserted;
