@@ -99,9 +99,7 @@ bool Play::isWon() {
 }
 
 void Play::run() {
-    int row;
-    int col;
-    char c;
+
     std::string cmd;
 
     std::cout << board;
@@ -118,6 +116,11 @@ void Play::run() {
         for (auto &c : cmd) c = ::tolower(c);
 
         if (cmd == "i" || cmd == "insert") {
+
+            int row;
+            int col;
+            char c;
+
             if (!(std::cin >> row && std::cin >> col && std::cin >> c)) {
                 std::cout << "Didn't get that. Try again" << std::endl;
                 continue;

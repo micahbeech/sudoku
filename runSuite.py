@@ -60,7 +60,7 @@ def main():
     directory = args['directory']
     error = args['error']
     
-    if directory[:-1] != '/':
+    if directory[-1:] != '/':
         directory += "/"
 
     suiteFile = directory + suiteFile
