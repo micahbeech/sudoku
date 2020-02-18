@@ -8,9 +8,11 @@
 
 void Solution::solveSudoku(Board& board) {
     std::vector<char> characters{'1','2','3','4','5','6','7','8','9'};
-    while (!characters.empty()) {
-        for (auto c = characters.begin(); c != characters.end(); ++c) {
-            if (!insert(board, *c)) characters.erase(c);
+    bool didInsert = true;
+    while (didInsert) {
+        didInsert = false;
+        for (auto c : characters) {
+            if (insert(board, c)) didInsert = true;
         }
     }
 }
@@ -53,54 +55,43 @@ void Solution::sortPlacesBoxes(std::vector<std::pair<int,int>> &places) {
 // inserts any c at any place in places that can be inserted into board
 bool Solution::insert(Board &board, char c) {
     std::vector<std::pair<int,int>> places = placeOptions(board, c);
-    bool inserted = false;
     int i = 0;
-    while (i < places.size()) {
 	sortPlacesRows(places);
+    while (i < places.size()) {
         if (i == places.size() - 1 || places[i].first != places[i+1].first) {
             board.insert(places[i].first, places[i].second, c);
-	    inserted = true;
-            places = placeOptions(board, c);
-        } else {
-            int row = places[i].first;
-            do { ++i; } while (i < places.size() && places[i].first == row);
+	        return true;
         }
+        int row = places[i].first;
+        do { ++i; } while (i < places.size() && places[i].first == row);
     }
     i = 0;
+    sortPlacesCols(places);
     while (i < places.size()) {
-	sortPlacesCols(places);
         if (i == places.size() - 1 || places[i].second != places[i+1].second) {
             board.insert(places[i].first, places[i].second, c);
-	    inserted = true;
-            places = placeOptions(board, c);
-        } else {
-            int col = places[i].second;
-            do { ++i; } while (i < places.size() && places[i].second == col);
+	        return true;
         }
+        int col = places[i].second;
+        do { ++i; } while (i < places.size() && places[i].second == col);
     }
     i = 0;
+    sortPlacesBoxes(places);
     while (i < places.size()) {
-	sortPlacesBoxes(places);
         if (i == places.size() - 1) {
             board.insert(places[i].first, places[i].second, c);
-	    inserted = true;
-            places = placeOptions(board, c);
-            continue;
+	        return true;
         } 
         int box1 = (places[i].first / BOX_WIDTH) * BOX_WIDTH + places[i].second / BOX_WIDTH;
         int box2 = (places[i+1].first / BOX_WIDTH) * BOX_WIDTH + places[i+1].second / BOX_WIDTH;
         if (box1 != box2) {
             board.insert(places[i].first, places[i].second, c);
-	    inserted = true;
-            places = placeOptions(board, c);
-        } else {
-	    int box = (places[i].first / BOX_WIDTH) * BOX_WIDTH + places[i].second / BOX_WIDTH;
-            do { 
-                ++i; 
-            } while (i < places.size() && box == (places[i].first / BOX_WIDTH) * BOX_WIDTH + places[i].second / BOX_WIDTH);
+	        return true;
         }
+	    int box = (places[i].first / BOX_WIDTH) * BOX_WIDTH + places[i].second / BOX_WIDTH;
+        do { ++i; } while (i < places.size() && box == (places[i].first / BOX_WIDTH) * BOX_WIDTH + places[i].second / BOX_WIDTH);
     }
-    return inserted;
+    return false;
 }
 
 std::vector<std::pair<int,int>> Solution::placeOptions(Board &board, char c) {

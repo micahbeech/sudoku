@@ -2,3 +2,9 @@ solutiontest
 fill boards/board2.txt
 solve
 print
+fill boards/board3.txt
+solve
+print
+fill boards/board4.txt
+solve
+print
