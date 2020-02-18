@@ -5,6 +5,7 @@ class Solution {
 
   public:
   
+    // solves the sudoku puzzle given by board
     void solveSudoku(Board& board);
 
     // sorts the list of places into ascending order of row
@@ -18,6 +19,7 @@ class Solution {
     // inserts any c at any place in places that can be inserted into board
     bool insert(Board &board, char c);
 
+    // returns a vector of all possible locations on the board that c could go
     std::vector<std::pair<int,int>> placeOptions(Board &board, char c);
 
     // returns true if c is in row

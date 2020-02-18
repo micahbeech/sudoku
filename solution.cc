@@ -6,6 +6,7 @@
 #include "board.h"
 #include "solution.h"
 
+// solves the sudoku puzzle given by board
 void Solution::solveSudoku(Board& board) {
     std::vector<char> characters{'1','2','3','4','5','6','7','8','9'};
     bool didInsert = true;
@@ -54,30 +55,50 @@ void Solution::sortPlacesBoxes(std::vector<std::pair<int,int>> &places) {
 
 // inserts any c at any place in places that can be inserted into board
 bool Solution::insert(Board &board, char c) {
+
+    // get all places that c could go on the board
     std::vector<std::pair<int,int>> places = placeOptions(board, c);
+
     int i = 0;
 	sortPlacesRows(places);
+
     while (i < places.size()) {
+
+        // if places[i] is the only option in its row, insert it
         if (i == places.size() - 1 || places[i].first != places[i+1].first) {
             board.insert(places[i].first, places[i].second, c);
 	        return true;
         }
+
+        // skip to the next row
         int row = places[i].first;
         do { ++i; } while (i < places.size() && places[i].first == row);
+
     }
+
     i = 0;
     sortPlacesCols(places);
+
     while (i < places.size()) {
+
+        // if places[i] is the only option in its column, insert it
         if (i == places.size() - 1 || places[i].second != places[i+1].second) {
             board.insert(places[i].first, places[i].second, c);
 	        return true;
         }
+
+        // skip to the next column
         int col = places[i].second;
         do { ++i; } while (i < places.size() && places[i].second == col);
+
     }
+
     i = 0;
     sortPlacesBoxes(places);
+
     while (i < places.size()) {
+
+        // if places[i] is the only option in its box, insert it
         if (i == places.size() - 1) {
             board.insert(places[i].first, places[i].second, c);
 	        return true;
@@ -88,26 +109,41 @@ bool Solution::insert(Board &board, char c) {
             board.insert(places[i].first, places[i].second, c);
 	        return true;
         }
+
+        // skip to next box
 	    int box = (places[i].first / BOX_WIDTH) * BOX_WIDTH + places[i].second / BOX_WIDTH;
         do { ++i; } while (i < places.size() && box == (places[i].first / BOX_WIDTH) * BOX_WIDTH + places[i].second / BOX_WIDTH);
+
     }
+
+    // did not insert c anywhere in the board
     return false;
 }
 
+// returns a vector of all possible locations on the board that c could go
 std::vector<std::pair<int,int>> Solution::placeOptions(Board &board, char c) {
+
     std::vector<std::pair<int,int>> places;
+
     for (int n = 0; n < BOARD_SIZE; ++n) {
+
         for (int m = 0; m < BOARD_SIZE; ++m) {
+
             try {
+                // it is an option if it isn't in this box, row, column and there isn't already a number here
                 if (board.getContents().at(n).at(m) == '.' && !boxContains(board, n, m, c) && !rowContains(board, n, c) && !colContains(board, m, c)) {
                     places.push_back(std::make_pair(n, m));
                 }
+
             } catch (...) {
                 std::cerr << "Board is invalid size." << std::endl;
                 return std::vector<std::pair<int,int>>{};
+
             }
+
         }
     }
+
     return places;
 }
 
@@ -157,5 +193,6 @@ bool Solution::boxContains(Board &board, int row, int col, char c) {
             }
         }
     }
+    
     return false;
 }
