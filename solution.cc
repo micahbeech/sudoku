@@ -102,6 +102,7 @@ bool Solution::insert(Board &board, char c) {
             board.insert(places[i].first, places[i].second, c);
 	        return true;
         } 
+
         int box1 = (places[i].first / BOX_WIDTH) * BOX_WIDTH + places[i].second / BOX_WIDTH;
         int box2 = (places[i+1].first / BOX_WIDTH) * BOX_WIDTH + places[i+1].second / BOX_WIDTH;
         if (box1 != box2) {
@@ -110,8 +111,7 @@ bool Solution::insert(Board &board, char c) {
         }
 
         // skip to next box
-	    int box = (places[i].first / BOX_WIDTH) * BOX_WIDTH + places[i].second / BOX_WIDTH;
-        do { ++i; } while (i < places.size() && box == (places[i].first / BOX_WIDTH) * BOX_WIDTH + places[i].second / BOX_WIDTH);
+        do { ++i; } while (i < places.size() && box1 == (places[i].first / BOX_WIDTH) * BOX_WIDTH + places[i].second / BOX_WIDTH);
 
     }
 

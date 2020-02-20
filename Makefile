@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++14 -Wall -g -MMD
 EXEC = sudoku
-OBJECTS = board.o solution.o sudoku.o solutionTest.o play.o
+OBJECTS = board.o solution.o sudoku.o solutionTest.o play.o backTracking.o
 DEPENDS = ${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}
