@@ -1,5 +1,3 @@
-#include <vector>
-#include <cassert>
 #include <iostream>
 
 #include "board.h"
@@ -24,7 +22,9 @@ Board::Board(const std::vector<std::vector<char>> &board) : board(board) {
 
 Board::Board(std::initializer_list<char> init) {
 
-    assert(init.size() == BOARD_SIZE * BOARD_SIZE);
+    if (init.size() != BOARD_SIZE * BOARD_SIZE) {
+        throw BAD_BOARD_SIZE{};
+    }
 
     board.reserve(BOARD_SIZE);
 

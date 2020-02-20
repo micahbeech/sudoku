@@ -1,7 +1,8 @@
-#include "play.h"
-
+#include <vector>
 #include <iostream>
 #include <fstream>
+
+#include "play.h"
 
 Play::Play(std::vector<std::string> &boards) {
 

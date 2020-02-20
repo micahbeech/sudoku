@@ -1,15 +1,9 @@
-
-#include "board.h"
-#include "solution.h"
-#include "solutionTest.h"
-
-#include <string>
 #include <iostream>
 #include <vector>
 #include <utility>
 #include <fstream>
 
-SolutionTest::SolutionTest(Board &board, Solution &sol) : board{board}, sol{sol} {}
+#include "solutionTest.h"
 
 void SolutionTest::empty() {
     board = Board{};

@@ -1,8 +1,8 @@
 #ifndef RUNTESTS_H
 #define RUNTESTS_H
 
-class Board;
-class Solution;
+#include "board.h"
+#include "solution.h"
 
 class SolutionTest {
 
@@ -10,8 +10,6 @@ class SolutionTest {
     Solution sol;
 
   public:
-
-    SolutionTest(Board &board, Solution &sol);
 
     // Runs the tests
     // When prompted, enter the method name you want to run that method
