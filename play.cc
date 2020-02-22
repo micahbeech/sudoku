@@ -1,6 +1,7 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include <random>
 
 #include "play.h"
 
@@ -11,7 +12,8 @@ Play::Play(std::vector<std::string> &boards) {
         return;
     }
 
-    int boardIndex = rand() % boards.size();
+    std::random_device rd;
+    int boardIndex = rd() % boards.size();
 
     std::string filename = boards[boardIndex];
     std::ifstream f{filename};

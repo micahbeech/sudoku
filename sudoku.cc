@@ -12,7 +12,14 @@ int main() {
     for (auto &c : version) c = ::tolower(c);
 
     if (version == "play") {
-        std::vector<std::string> boards{"boards/board2.txt"};
+        const int board_start = 2;
+        const int board_end = 4;
+
+        std::vector<std::string> boards;
+        for (int i = board_start; i <= board_end; ++i) {
+            boards.push_back("boards/board" + std::to_string(i) + ".txt");
+        }
+
         Play play{boards};
         play.run();
 
